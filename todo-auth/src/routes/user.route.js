@@ -6,15 +6,10 @@ const awaitHandlerFactory = require("../middleware/awaitHandlerFactory.middlewar
 const auth = require("../middleware/auth.middleware");
 const {
   createUserSchema,
-  updateUserSchema,
-  validateLogin,
+  updateUserSchema
 } = require("../middleware/validators/user.validator");
 
 const router = express.Router();
-
-// router.get("/id/:id", awaitHandlerFactory(UserController.getUserById));
-// router.get("/username/:username", awaitHandlerFactory(UserController.getUserByUsername));
-// router.get("/", awaitHandlerFactory(UserController.getAllusers));
 
 router.get(
     "/", 
@@ -29,9 +24,9 @@ router.get(
 );
 
 router.get(
-  "/username/:username",
+  "/email/:email",
   auth(),
-  awaitHandlerFactory(UserController.getUserByUsername)
+  awaitHandlerFactory(UserController.getUserByEmail)
 );
 
 router.get(

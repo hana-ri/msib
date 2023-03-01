@@ -34,8 +34,8 @@ class UserController {
       res.send(userWithoutPassword);
     };
   
-    getUserByUsername = async (req, res, next) => {
-      const user = await UserModel.findOne({ username: req.params.username });
+    getUserByEmail = async (req, res, next) => {
+      const user = await UserModel.findOne({ email: req.params.email });
       if (!user) {
         throw new HttpException(404, "User not found");
       }
@@ -102,9 +102,9 @@ class UserController {
     userLogin = async (req, res, next) => {
       this.checkValidation(req);
   
-      const { username, password: pass } = req.body;
-  
-      const user = await UserModel.findOne({ username });
+      const { email, password: pass } = req.body;
+      console.log(email);
+      const user = await UserModel.findOne({ email });
   
       if (!user) {
         throw new HttpException(401, "Unable to login!");

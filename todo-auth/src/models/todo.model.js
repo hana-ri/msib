@@ -3,6 +3,7 @@ const { multipleColumnSet } = require("../utils/common.utils");
 
 class TodoModel {
     tableName = "todo";
+    timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     list = async (params = {}) => {
         let sql = `SELECT * FROM ${this.tableName};`;
@@ -21,6 +22,7 @@ class TodoModel {
     }
 
     update = async (params, id) => {
+        params.updatedAt = this.timestamp;
         const {columnSet, values} = multipleColumnSet(params);
         
         const sql = `UPDATE ${this.tableName} SET ${columnSet} WHERE id = ?`
